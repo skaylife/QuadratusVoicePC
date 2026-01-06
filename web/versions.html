@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История версий | Quadratus Voice PC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Те же стили для консистентности */
+        :root {
+            --bg-color: #0f0f12;
+            --card-bg: rgba(30, 30, 35, 0.6);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --accent-color: #ff3b3b;
+            --text-main: #ffffff;
+            --text-secondary: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+
+        header {
+            padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            backdrop-filter: blur(15px); background: rgba(15, 15, 18, 0.85);
+            border-bottom: 1px solid var(--card-border);
+        }
+        .logo { font-size: 1.3rem; font-weight: 800; }
+        .logo span { color: var(--accent-color); }
+        nav { display: flex; gap: 30px; }
+        nav a { color: var(--text-secondary); font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: var(--text-main); }
+        nav a.active { color: white; border-bottom: 2px solid var(--accent-color); }
+
+        .container { max-width: 900px; margin: 100px auto; padding: 0 20px; }
+        
+        /* Стили для документации */
+        .doc-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .doc-title { font-size: 2rem; margin-bottom: 20px; font-weight: 800; }
+        .doc-subtitle { font-size: 1.3rem; margin-top: 30px; margin-bottom: 15px; color: white; border-left: 3px solid var(--accent-color); padding-left: 15px; }
+        .doc-text { color: var(--text-secondary); margin-bottom: 15px; font-size: 1rem; }
+        .doc-list { list-style: none; padding-left: 0; margin-bottom: 20px; }
+        .doc-list li { position: relative; padding-left: 25px; margin-bottom: 10px; color: var(--text-secondary); }
+        .doc-list li::before { content: "•"; color: var(--accent-color); font-weight: bold; position: absolute; left: 0; }
+
+        /* Timeline версий */
+        .timeline-item {
+            border-left: 2px solid var(--card-border);
+            padding-left: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: ""; position: absolute; left: -6px; top: 5px;
+            width: 10px; height: 10px; background: var(--accent-color);
+            border-radius: 50%; box-shadow: 0 0 10px var(--accent-color);
+        }
+        .version-tag { background: rgba(255,59,59,0.1); color: var(--accent-color); padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; margin-bottom: 10px; display: inline-block; }
+        .date { font-size: 0.85rem; color: #555; margin-left: 10px; }
+
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            nav { display: none; }
+            .doc-section { padding: 25px; }
+            .doc-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Quadratus<span>Voice PC</span></div>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="versions.html" class="active">Версии и Описание</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <!-- Полное описание программы -->
+        <div class="doc-section">
+            <h1 class="doc-title">О программе</h1>
+            <p class="doc-text">
+                <strong>Quadratus Voice AI</strong> — это инновационное десктопное приложение для Windows, которое превращает ваш голос в печатный текст в режиме реального времени. Мы ориентированы на профессионалов, которым важна скорость, приватность и удобство работы.
+            </p>
+
+            <h2 class="doc-subtitle">🔒 Приватность и Offline</h2>
+            <p class="doc-text">
+                В отличие от облачных решений (Siri, Google), Quadratus Voice AI выполняет все вычисления локально. Ваш голос не покидает компьютер, программа работает без интернета.
+            </p>
+
+            <h2 class="doc-subtitle">🚀 Технология Paste Engine</h2>
+            <ul class="doc-list">
+                <li><strong>Paste Mode (Ctrl+V):</strong> Мгновенная вставка целых предложений. Исключает задержки «пропечатывания».</li>
+                <li><strong>Keyboard Mode:</strong> Классическая эмуляция нажатий для игр и специфического софта.</li>
+            </ul>
+
+            <h2 class="doc-subtitle">👁 HUD Интерфейс</h2>
+            <p class="doc-text">
+                Специальный оверлей позволяет видеть распознанный текст поверх всех окон. Вы всегда контролируете результат, даже если работаете в другом приложении.
+            </p>
+        </div>
+
+        <!-- История Версий -->
+        <h2 style="margin-bottom: 30px;">История обновлений</h2>
+
+        <!-- Версия 1.2.0 -->
+        <div class="timeline-item">
+            <span class="version-tag">v1.2.0 — Latest</span> <span class="date">Январь 2026</span>
+            <h3>Глобальное обновление "Installer"</h3>
+            <p class="doc-text" style="margin-top: 10px;">
+                Мы отказались от --onefile в пользу полноценного инсталлятора.
+            </p>
+            <ul class="doc-list">
+                <li>Добавлен <strong>Setup.exe</strong> для быстрой установки.</li>
+                <li>Скорость "холодного" запуска увеличена в 10 раз.</li>
+                <li>Добавлена возможность выбора папки для моделей.</li>
+                <li>Исправлен баг с кодировкой логов.</li>
+            </ul>
+            <a href="QuadratusVoice_Setup.exe" style="color: var(--accent-color); font-weight: 600;">Скачать v1.2.0 ↓</a>
+        </div>
+
+        <!-- Версия 1.1.0 -->
+        <div class="timeline-item">
+            <span class="version-tag" style="background: rgba(255,255,255,0.1); color: #fff;">v1.1.0</span> <span class="date">Декабрь 2025</span>
+            <h3>Overlay Update</h3>
+            <ul class="doc-list">
+                <li>Внедрен графический оверлей (HUD).</li>
+                <li>Добавлена поддержка "тяжелой" модели (1.8 GB).</li>
+                <li>Логи теперь сохраняются в папку /logs по дням.</li>
+            </ul>
+        </div>
+
+        <!-- Версия 1.0.0 -->
+        <div class="timeline-item" style="border-left-color: transparent;">
+            <span class="version-tag" style="background: rgba(255,255,255,0.1); color: #fff;">v1.0.0</span> <span class="date">Ноябрь 2025</span>
+            <h3>Релиз</h3>
+            <p class="doc-text">Первая публичная версия с базовым функционалом Vosk.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

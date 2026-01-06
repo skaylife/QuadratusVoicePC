@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratus Voice PC | Официальный сайт</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f0f12;
+            --card-bg: rgba(30, 30, 35, 0.6);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --accent-color: #ff3b3b; /* Quadratus Red */
+            --accent-hover: #ff5c5c;
+            --text-main: #ffffff;
+            --text-secondary: #a0a0a0;
+            --glow: 0 0 35px rgba(255, 59, 59, 0.25);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- HEADER --- */
+        header {
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+            background: rgba(15, 15, 18, 0.85);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.5px; white-space: nowrap; }
+        .logo span { color: var(--accent-color); }
+
+        nav { display: flex; gap: 30px; }
+        nav a { color: var(--text-secondary); font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: var(--text-main); }
+        nav a.active { color: white; border-bottom: 2px solid var(--accent-color); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+            background: radial-gradient(circle at 50% 30%, rgba(255, 59, 59, 0.06) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5.5rem); /* Адаптивный размер шрифта */
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #fff, #bbb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Слоган под заголовком */
+        .hero h2 {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 300;
+            color: var(--text-main);
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+
+        .btn {
+            padding: 16px 36px;
+            background: var(--accent-color);
+            color: white;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--glow);
+            font-size: 1rem;
+        }
+        .btn:hover { background: var(--accent-hover); transform: translateY(-3px); }
+
+        .btn-outline {
+            padding: 16px 36px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+        /* --- SLIDER SECTION --- */
+        .slider-wrapper {
+            max-width: 1000px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+        }
+
+        .slider-window {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            background: #000;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            aspect-ratio: 16 / 9;
+        }
+
+        .slides-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            background: #1a1a1e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slider-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            z-index: 10;
+        }
+        .slider-nav-btn:hover { background: var(--accent-color); }
+        .prev-btn { left: 20px; }
+        .next-btn { right: 20px; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .dot.active { background: var(--accent-color); transform: scale(1.3); }
+
+        /* --- CONTENT GRID --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 80px 0; }
+        .section-title { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 50px; text-align: center; font-weight: 800; }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 35px;
+            border-radius: 24px;
+            transition: 0.3s;
+            height: 100%;
+        }
+        .card:hover { border-color: rgba(255, 59, 59, 0.3); transform: translateY(-5px); }
+        
+        .card h3 { 
+            font-size: 1.5rem; 
+            margin-bottom: 15px; 
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card p { color: var(--text-secondary); font-size: 1rem; margin-bottom: 15px; }
+
+        /* --- DOWNLOAD AREA --- */
+        .download-section {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+            border-top: 1px solid var(--card-border);
+            text-align: center;
+        }
+
+        .dl-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .dl-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: left;
+            width: 320px;
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .dl-card:hover { background: rgba(255,255,255,0.07); border-color: var(--text-main); }
+        .dl-icon { font-size: 2rem; }
+        .dl-text strong { display: block; font-size: 1.1rem; }
+        .dl-text span { font-size: 0.85rem; color: var(--text-secondary); }
+
+        /* --- GITHUB --- */
+        .github-box {
+            margin-top: 60px;
+            padding: 30px;
+            background: #161b22;
+            border-radius: 20px;
+            border: 1px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- MOBILE ADAPTATION --- */
+        @media (max-width: 768px) {
+            header { 
+                padding: 15px 20px; 
+                background: rgba(15, 15, 18, 0.95);
+            }
+            nav { display: none; } /* Скрываем меню на мобильном */
+            
+            .hero { padding-top: 110px; padding-bottom: 40px; }
+            .hero h1 { line-height: 1.1; margin-bottom: 10px; }
+            .hero h2 { margin-bottom: 20px; font-size: 1.3rem; }
+            
+            /* Кнопки на весь экран для удобства пальцев */
+            .btn-group { flex-direction: column; width: 100%; gap: 15px; }
+            .btn, .btn-outline { width: 100%; text-align: center; }
+
+            /* Слайдер: меньше отступы, прозрачные кнопки */
+            .slider-wrapper { padding: 0 10px; margin-bottom: 50px; }
+            .slider-nav-btn { width: 35px; height: 35px; font-size: 1rem; background: rgba(0,0,0,0.4); }
+            .prev-btn { left: 10px; }
+            .next-btn { right: 10px; }
+
+            /* Сетка в одну колонку */
+            .bento-grid { grid-template-columns: 1fr; gap: 20px; }
+            .card { padding: 25px; }
+            
+            /* Скачивание */
+            .dl-grid { flex-direction: column; width: 100%; }
+            .dl-card { width: 100%; max-width: none; } 
+            
+            .github-box { flex-direction: column; text-align: center; gap: 20px; padding: 25px; }
+            .github-box .btn-outline { width: 100%; margin: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Quadratus<span>Voice PC</span></div>
+        <nav>
+            <a href="index.html" class="active">Главная</a>
+            <a href="versions.html">Версии и Описание</a>
+            <a href="#download">Скачать</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Quadratus Voice PC</h1>
+            <h2>Ваша речь — это ваш текст</h2>
+            <p>Профессиональный голосовой ассистент с локальными нейросетями. <br>Ввод текста, оверлей и логирование. Работает без интернета.</p>
+            
+            <div class="btn-group">
+                <a href="#download" class="btn">Скачать бесплатно</a>
+                <a href="versions.html" class="btn-outline">История Версий →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Слайдер скриншотов -->
+    <div class="slider-wrapper">
+        <div class="slider-window">
+            <div class="slides-track">
+                <!-- 1. Скриншот -->
+                <div class="slide">
+                    <!-- Заглушка (удалить div, если есть картинка) -->
+                    <div style="position: absolute; color: #555;">Скриншот 1 (файл screen1.png)</div>
+                    <img src="screen1.png" alt="Интерфейс программы" onerror="this.style.display='none'">
+                </div>
+                <!-- 2. Скриншот -->
+                <div class="slide">
+                    <div style="position: absolute; color: #555;">Скриншот 2 (файл screen2.png)</div>
+                    <img src="screen2.png" alt="Оверлей ввода" onerror="this.style.display='none'">
+                </div>
+                <!-- 3. Скриншот -->
+                <div class="slide">
+                    <div style="position: absolute; color: #555;">Скриншот 3 (файл screen3.png)</div>
+                    <img src="screen3.png" alt="Настройки" onerror="this.style.display='none'">
+                </div>
+            </div>
+            
+            <button class="slider-nav-btn prev-btn">❮</button>
+            <button class="slider-nav-btn next-btn">❯</button>
+            
+            <div class="slider-dots">
+                <div class="dot active" onclick="goToSlide(0)"></div>
+                <div class="dot" onclick="goToSlide(1)"></div>
+                <div class="dot" onclick="goToSlide(2)"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основное описание (Bento Grid) -->
+    <div class="container section-padding" id="about">
+        <h2 class="section-title">Возможности</h2>
+        
+        <div class="bento-grid">
+            <!-- Карточка 1 -->
+            <div class="card">
+                <h3>🎤 Умный Ввод</h3>
+                <p>Программа пишет текст туда, где стоит курсор. Если курсор не активен, текст появляется в специальном <strong>Оверлее</strong> поверх всех окон. Вы всегда видите результат.</p>
+                <p style="font-size: 0.9rem; opacity: 0.7;">Идеально для Telegram, Discord и Word.</p>
+            </div>
+
+            <!-- Карточка 2 -->
+            <div class="card">
+                <h3>📋 Авто-Буфер</h3>
+                <p>Весь распознанный текст автоматически сохраняется в буфер обмена. Просто нажмите Ctrl+V, чтобы вставить его в любую программу.</p>
+            </div>
+
+            <!-- Карточка 3 -->
+            <div class="card">
+                <h3>📂 Логирование</h3>
+                <p>Программа создает папку с логами, рассортированными по дням. Вы всегда можете вернуться к старым записям и найти, что диктовали вчера.</p>
+            </div>
+
+            <!-- Карточка 4 -->
+            <div class="card" style="border-color: rgba(255,59,59,0.3);">
+                <h3>⚙️ Принцип работы</h3>
+                <p>Это не облачный сервис. Quadratus использует локальную модель <strong>Vosk</strong>, которая лежит прямо на вашем диске.</p>
+                <ul style="padding-left: 20px; color: var(--text-secondary); margin-top: 10px;">
+                    <li>Работает без интернета</li>
+                    <li>Полная конфиденциальность</li>
+                    <li>Мгновенный отклик</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модели -->
+    <div class="container section-padding" id="models" style="padding-top: 0;">
+        <h2 class="section-title">Выбор Модели</h2>
+        <div class="bento-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+            
+            <!-- Легкая модель -->
+            <div class="card">
+                <h3>⚡ Lite Model (50 MB)</h3>
+                <p>Идет по умолчанию. Очень легкая, скачивается мгновенно. Идеальна для простых команд и слабых ПК.</p>
+            </div>
+
+            <!-- Тяжелая модель -->
+            <div class="card" style="background: linear-gradient(145deg, rgba(255,59,59,0.05), transparent);">
+                <h3>🧠 Pro Model (1.8 GB)</h3>
+                <p>Если нужна максимальная точность. Загружается дольше, но понимает сложные предложения и контекст в разы лучше.</p>
+                <p style="font-size: 0.9rem; color: var(--accent-color); margin-top: 10px;">Рекомендуется для больших текстов.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скачивание -->
+    <div class="download-section section-padding" id="download">
+        <div class="container">
+            <h2 class="section-title">Установить Quadratus</h2>
+            
+            <div class="dl-grid">
+                <!-- Инсталлятор -->
+                <a href="QuadratusVoice_Setup.exe" class="dl-card" download>
+                    <div class="dl-icon">💾</div>
+                    <div class="dl-text">
+                        <strong>Скачать Installer</strong>
+                        <span>.exe • Автоматическая установка</span>
+                    </div>
+                </a>
+
+                <!-- Portable -->
+                <a href="QuadratusVoice_Portable.zip" class="dl-card" download>
+                    <div class="dl-icon">📦</div>
+                    <div class="dl-text">
+                        <strong>Portable Версия</strong>
+                        <span>.zip • Без установки</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="dl-grid" style="margin-top: 20px;">
+                <!-- Модель отдельно -->
+                <a href="model-big.zip" class="dl-card" style="width: auto; padding: 15px 30px; border-color: rgba(255,255,255,0.05);" download>
+                    <div class="dl-icon" style="font-size: 1.5rem;">🧠</div>
+                    <div class="dl-text">
+                        <strong>Скачать Pro-модель (1.8 GB)</strong>
+                        <span>Для улучшения точности</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- GitHub Block -->
+            <div class="github-box">
+                <div style="text-align: left;">
+                    <h3 style="color: white; margin-bottom: 5px;">Open Source</h3>
+                    <p style="color: #8b949e; font-size: 0.9rem;">Изучите исходный код перед использованием.</p>
+                </div>
+                <a href="https://github.com/YOUR_USERNAME/Quadratus" target="_blank" class="btn btn-outline" style="margin: 0;">Перейти на GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p style="font-size: 0.9rem; opacity: 0.6; padding: 40px;">&copy; 2026 Quadratus Software.</p>
+    </footer>
+
+    <!-- Логика Слайдера (Swipe support) -->
+    <script>
+        const track = document.querySelector('.slides-track');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentIndex].classList.add('active');
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlider();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+
+        // Мобильные свайпы
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const sliderWindow = document.querySelector('.slider-window');
+        
+        sliderWindow.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        sliderWindow.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // Свайп влево (next)
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSlider();
+            }
+            if (touchEndX > touchStartX + 50) {
+                // Свайп вправо (prev)
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            }
+        }
+    </script>
+
+</body>
+</html>
